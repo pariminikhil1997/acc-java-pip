@@ -14,7 +14,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.release>17</maven.compiler.release>
-    <sonar.projectKey>pariminikhil1997</sonar.projectKey>
+    <sonar.projectKey>pariminikhil1997_acc-java-pip</sonar.projectKey>
     <sonar.organization>pariminikhil1997</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
   </properties>
