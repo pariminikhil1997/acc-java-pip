@@ -2,9 +2,9 @@ name: SonarCloud Analysis
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main, genai-optimization ]
   pull_request:
-    branches: [ main, develop ]
+    branches: [ main, genai-optimization ]
 
 jobs:
   sonar:
@@ -27,6 +27,3 @@ jobs:
 
       - name: Build & Test
         run: mvn clean verify
-
-      - name: SonarCloud Scan
-        run: mvn sonar:sonar -Dsonar.login=${{ secrets.SONAR_TOKEN }}
