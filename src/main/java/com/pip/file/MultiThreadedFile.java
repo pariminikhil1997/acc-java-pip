@@ -3,24 +3,24 @@ package com.pip.file;
 import java.io.File;
 import java.nio.file.Files;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+
+import com.pip.exception.DataProcessingException;
 
 public class MultiThreadedFile implements FileProcessor {
-	
-	ExecutorService executorService = Executors.newFixedThreadPool(2);
 
-	@Override
-	public List<String> read(File file) {
+    @Override
+    public List<String> read(File file) {
+        if (file == null) {
+            throw new DataProcessingException("File must not be null", null);
+        }
+        if (!file.exists()) {
+            throw new DataProcessingException("File not found: " + file.getAbsolutePath(), null);
+        }
 
-		try {
-			Future<List<String>> future = executorService.submit(() -> Files.readAllLines(file.toPath()));
-			return future.get();
-		} catch (Exception e) {
-			throw new RuntimeException("File processing failed", e);
-		} finally {
-			executorService.shutdown();
-		}
-	}
+        try (var lines = Files.lines(file.toPath())) {
+            return lines.toList();
+        } catch (Exception e) {
+            throw new DataProcessingException("File processing failed: " + e.getMessage(), e);
+        }
+    }
 }
