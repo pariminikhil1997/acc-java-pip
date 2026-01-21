@@ -20,7 +20,7 @@ public class OptionalSalary implements DataProcessor<List<Employee>, Optional<Do
 
     @Override
     public Optional<Double> process(List<Employee> employees) {
-        // No name provided via DataProcessor contract; return empty to avoid surprising behavior.
+        // Generic process doesn't have a name; return empty instead of throwing
         return Optional.empty();
     }
 

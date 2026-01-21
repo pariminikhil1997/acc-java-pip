@@ -1,5 +1,6 @@
 package com.pip.processor;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -15,6 +16,9 @@ public class DepartmentCount implements DataProcessor<List<Employee>, Map<String
 
     @Override
     public Map<String, Long> process(List<Employee> employees) {
+        if (employees == null || employees.isEmpty()) {
+            return Collections.emptyMap();
+        }
         return employees.stream()
                 .collect(Collectors.groupingBy(Employee::department, Collectors.counting()));
     }

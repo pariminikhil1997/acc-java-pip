@@ -13,6 +13,9 @@ public class SalaryStatistics implements DataProcessor<List<Employee>, DoubleSum
 
     @Override
     public DoubleSummaryStatistics process(List<Employee> employees) {
+        if (employees == null || employees.isEmpty()) {
+            return new DoubleSummaryStatistics();
+        }
         return employees.stream()
                 .filter(e -> e.salary() > 0)
                 .mapToDouble(Employee::salary)

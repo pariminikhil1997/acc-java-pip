@@ -10,6 +10,9 @@ public class HighestSalary implements DataProcessor<List<Employee>, Optional<Emp
 	
 	@Override
 	public Optional<Employee> process(List<Employee> employees) {
+		if (employees == null || employees.isEmpty()) {
+			return Optional.empty();
+		}
 		return employees.stream()
 				        .filter(e -> e.salary() > 0)
 				        .max(Comparator.comparingDouble(Employee::salary));

@@ -1,5 +1,6 @@
 package com.pip.processor;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -13,6 +14,9 @@ public class EmployeeSorting implements DataProcessor<List<Employee>, List<Emplo
 
     @Override
     public List<Employee> process(List<Employee> employees) {
+        if (employees == null || employees.isEmpty()) {
+            return Collections.emptyList();
+        }
         return employees.stream()
                 .sorted(Comparator.comparingDouble(Employee::salary).reversed())
                 .toList();
