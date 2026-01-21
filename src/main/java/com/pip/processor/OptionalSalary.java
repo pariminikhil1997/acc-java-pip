@@ -5,14 +5,23 @@ import java.util.Optional;
 
 import com.pip.model.Employee;
 
-public class OptionalSalary {
-	
-	public Optional<Double> getSalaryByName(List<Employee> employees, String name){
-		return employees.stream()
-				        .filter(e -> e.name().equalsIgnoreCase(name))
-				        .map(Employee::salary)
-				        .filter(salary -> salary > 0)
-				        .findFirst();
-	}
+public class OptionalSalary implements DataProcessor<List<Employee>, Optional<Double>> {
+
+    public Optional<Double> getSalaryByName(List<Employee> employees, String name){
+        if (employees == null || name == null || name.isBlank()) {
+            return Optional.empty();
+        }
+        return employees.stream()
+                .filter(e -> e.name().equalsIgnoreCase(name))
+                .map(Employee::salary)
+                .filter(salary -> salary > 0)
+                .findFirst();
+    }
+
+    @Override
+    public Optional<Double> process(List<Employee> employees) {
+        // No name provided via DataProcessor contract; return empty to avoid surprising behavior.
+        return Optional.empty();
+    }
 
 }
