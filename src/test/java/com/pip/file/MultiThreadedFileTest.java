@@ -1,6 +1,7 @@
 package com.pip.file;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -25,4 +26,10 @@ public class MultiThreadedFileTest {
 		verify(processor,times(1)).read(file);
 	}
 	
+	@Test
+    void testReadNonExistentFileThrows() {
+        MultiThreadedFile processor = new MultiThreadedFile();
+        File f = new File("this_file_does_not_exist_hopefully.txt");
+        assertThrows(RuntimeException.class, () -> processor.read(f));
+    }
 }
