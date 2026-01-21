@@ -10,7 +10,6 @@ public class EmployeesByDepartment implements DataProcessor<List<Employee>, Map<
 
 	@Override
 	public Map<String, List<Employee>> process(List<Employee> employees) {
-		// TODO Auto-generated method stub
 		return employees.stream().collect(Collectors.groupingBy(Employee::department));
 	}
 
